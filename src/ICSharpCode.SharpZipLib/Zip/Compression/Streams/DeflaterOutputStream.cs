@@ -118,8 +118,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 				throw new SharpZipBaseException("Can't deflate all input?");
 			}
 
-			baseOutputStream_.Flush();
-
 			if (cryptoTransform_ != null)
 			{
 				if (cryptoTransform_ is ZipAESTransform)
@@ -158,8 +156,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 			{
 				throw new SharpZipBaseException("Can't deflate all input?");
 			}
-
-			await baseOutputStream_.FlushAsync(ct).ConfigureAwait(false);
 
 			if (cryptoTransform_ != null)
 			{
