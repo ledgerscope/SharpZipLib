@@ -120,9 +120,9 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 
 			if (cryptoTransform_ != null)
 			{
-				if (cryptoTransform_ is ZipAESTransform)
+				if (cryptoTransform_ is ZipAESTransform transform)
 				{
-					AESAuthCode = ((ZipAESTransform)cryptoTransform_).GetAuthCode();
+					AESAuthCode = transform.GetAuthCode();
 				}
 				cryptoTransform_.Dispose();
 				cryptoTransform_ = null;
@@ -159,9 +159,9 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 
 			if (cryptoTransform_ != null)
 			{
-				if (cryptoTransform_ is ZipAESTransform)
+				if (cryptoTransform_ is ZipAESTransform transform)
 				{
-					AESAuthCode = ((ZipAESTransform)cryptoTransform_).GetAuthCode();
+					AESAuthCode = transform.GetAuthCode();
 				}
 				cryptoTransform_.Dispose();
 				cryptoTransform_ = null;
