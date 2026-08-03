@@ -1,14 +1,11 @@
-using ICSharpCode.SharpZipLib.Checksum;
 using ICSharpCode.SharpZipLib.Tests.TestSupport;
 using ICSharpCode.SharpZipLib.Zip;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using NUnit.Framework;
 using System;
 using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Text;
+using System.Text.Json;
 using Does = ICSharpCode.SharpZipLib.Tests.TestSupport.Does;
 
 namespace ICSharpCode.SharpZipLib.Tests.Zip
@@ -656,13 +653,13 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 		{
 			bool exception = false;
 
-			object data = new byte[0];
+			byte[] data = new byte[0];
 			// Thisa wont be zero length here due to serialisation.
 			try
 			{
 				byte[] zipped = ZipZeroLength(data);
 
-				object o = UnZipZeroLength(zipped);
+				object o = UnZipZeroLength<byte[]>(zipped);
 
 				var returned = o as byte[];
 
@@ -685,9 +682,8 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 		public void SerializedObject()
 		{
 			var sampleDateTime = new DateTime(1853, 8, 26);
-			var data = (object)sampleDateTime;
-			byte[] zipped = ZipZeroLength(data);
-			object rawObject = UnZipZeroLength(zipped);
+			byte[] zipped = ZipZeroLength(sampleDateTime);
+			object rawObject = UnZipZeroLength<DateTime>(zipped);
 
 			var returnedDateTime = (DateTime)rawObject;
 
@@ -696,57 +692,48 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 			string sampleString = "Mary had a giant cat it ears were green and smelly";
 			zipped = ZipZeroLength(sampleString);
 
-			rawObject = UnZipZeroLength(zipped);
+			rawObject = UnZipZeroLength<string>(zipped);
 
 			var returnedString = rawObject as string;
 
 			Assert.AreEqual(sampleString, returnedString);
 		}
 
-		private byte[] ZipZeroLength(object data)
+
+private byte[] ZipZeroLength<T>(T data)
+	{
+		byte[] payload = JsonSerializer.SerializeToUtf8Bytes(data);
+
+		var memStream = new MemoryStream();
+		using (ZipOutputStream zipStream = new ZipOutputStream(memStream))
 		{
-			var formatter = new BinaryFormatter();
-			var memStream = new MemoryStream();
-
-			using (ZipOutputStream zipStream = new ZipOutputStream(memStream))
-			{
-				zipStream.PutNextEntry(new ZipEntry("data"));
-				formatter.Serialize(zipStream, data);
-				zipStream.CloseEntry();
-				zipStream.Close();
-			}
-
-			byte[] result = memStream.ToArray();
-			memStream.Close();
-
-			return result;
+			zipStream.PutNextEntry(new ZipEntry("data"));
+			zipStream.Write(payload, 0, payload.Length);
+			zipStream.CloseEntry();
+			zipStream.Close();
 		}
 
-		private object UnZipZeroLength(byte[] zipped)
+		return memStream.ToArray();
+	}
+
+	private T UnZipZeroLength<T>(byte[] zipped)
+	{
+		using var memStream = new MemoryStream(zipped);
+		using var zipStream = new ZipInputStream(memStream);
+
+		ZipEntry entry = zipStream.GetNextEntry();
+		if (entry == null)
 		{
-			if (zipped == null)
-			{
-				return null;
-			}
-
-			object result = null;
-			var formatter = new BinaryFormatter();
-			var memStream = new MemoryStream(zipped);
-			using (ZipInputStream zipStream = new ZipInputStream(memStream))
-			{
-				ZipEntry zipEntry = zipStream.GetNextEntry();
-				if (zipEntry != null)
-				{
-					result = formatter.Deserialize(zipStream);
-				}
-				zipStream.Close();
-			}
-			memStream.Close();
-
-			return result;
+			throw new InvalidOperationException("No zip entry found.");
 		}
 
-		[Test]
+		using var buffer = new MemoryStream();
+		zipStream.CopyTo(buffer);
+
+		return JsonSerializer.Deserialize<T>(buffer.ToArray())!;
+	}
+
+	[Test]
 		[Category("Zip")]
 		[TestCase("Hello")]
 		[TestCase("a/b/c/d/e/f/g/h/SomethingLikeAnArchiveName.txt")]
