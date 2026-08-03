@@ -108,10 +108,7 @@ namespace ICSharpCode.SharpZipLib.Checksum
 		/// <param name="buffer">Contains the data to update the CRC with.</param>
 		public void Update(byte[] buffer)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			Update(buffer, 0, buffer.Length);
 		}

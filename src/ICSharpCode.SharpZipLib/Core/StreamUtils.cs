@@ -33,15 +33,9 @@ namespace ICSharpCode.SharpZipLib.Core
 		/// <exception cref="EndOfStreamException">End of stream is encountered before all the data has been read.</exception>
 		public static void ReadFully(Stream stream, byte[] buffer, int offset, int count)
 		{
-			if (stream == null)
-			{
-				throw new ArgumentNullException(nameof(stream));
-			}
+			ArgumentNullException.ThrowIfNull(stream);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			// Offset can equal length when buffer and count are 0.
 			if ((offset < 0) || (offset > buffer.Length))
@@ -77,15 +71,9 @@ namespace ICSharpCode.SharpZipLib.Core
 		/// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> and or <paramref name="count"/> are invalid.</exception>
 		public static int ReadRequestedBytes(Stream stream, byte[] buffer, int offset, int count)
 		{
-			if (stream == null)
-			{
-				throw new ArgumentNullException(nameof(stream));
-			}
+			ArgumentNullException.ThrowIfNull(stream);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			// Offset can equal length when buffer and count are 0.
 			if ((offset < 0) || (offset > buffer.Length))
@@ -122,20 +110,11 @@ namespace ICSharpCode.SharpZipLib.Core
 		/// <param name="buffer">The buffer to use during copying.</param>
 		public static void Copy(Stream source, Stream destination, byte[] buffer)
 		{
-			if (source == null)
-			{
-				throw new ArgumentNullException(nameof(source));
-			}
+			ArgumentNullException.ThrowIfNull(source);
 
-			if (destination == null)
-			{
-				throw new ArgumentNullException(nameof(destination));
-			}
+			ArgumentNullException.ThrowIfNull(destination);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			// Ensure a reasonable size of buffer is used without being prohibitive.
 			if (buffer.Length < 128)
@@ -195,20 +174,11 @@ namespace ICSharpCode.SharpZipLib.Core
 			ProgressHandler progressHandler, TimeSpan updateInterval,
 			object sender, string name, long fixedTarget)
 		{
-			if (source == null)
-			{
-				throw new ArgumentNullException(nameof(source));
-			}
+			ArgumentNullException.ThrowIfNull(source);
 
-			if (destination == null)
-			{
-				throw new ArgumentNullException(nameof(destination));
-			}
+			ArgumentNullException.ThrowIfNull(destination);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			// Ensure a reasonable size of buffer is used without being prohibitive.
 			if (buffer.Length < 128)
@@ -216,10 +186,7 @@ namespace ICSharpCode.SharpZipLib.Core
 				throw new ArgumentException("Buffer is too small", nameof(buffer));
 			}
 
-			if (progressHandler == null)
-			{
-				throw new ArgumentNullException(nameof(progressHandler));
-			}
+			ArgumentNullException.ThrowIfNull(progressHandler);
 
 			bool copying = true;
 

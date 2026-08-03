@@ -703,10 +703,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 		private void AddFileContents(string name, Stream stream)
 		{
-			if (stream == null)
-			{
-				throw new ArgumentNullException(nameof(stream));
-			}
+			ArgumentNullException.ThrowIfNull(stream);
 
 			if (buffer_ == null)
 			{

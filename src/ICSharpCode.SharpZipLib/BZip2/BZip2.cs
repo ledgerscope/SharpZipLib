@@ -17,11 +17,9 @@ namespace ICSharpCode.SharpZipLib.BZip2
 		/// <param name="isStreamOwner">Both streams are closed on completion if true.</param>
 		public static void Decompress(Stream inStream, Stream outStream, bool isStreamOwner)
 		{
-			if (inStream == null)
-				throw new ArgumentNullException(nameof(inStream));
+			ArgumentNullException.ThrowIfNull(inStream);
 
-			if (outStream == null)
-				throw new ArgumentNullException(nameof(outStream));
+			ArgumentNullException.ThrowIfNull(outStream);
 
 			try
 			{
@@ -52,11 +50,9 @@ namespace ICSharpCode.SharpZipLib.BZip2
 		/// the lowest compression and 9 the highest.</param>
 		public static void Compress(Stream inStream, Stream outStream, bool isStreamOwner, int level)
 		{
-			if (inStream == null)
-				throw new ArgumentNullException(nameof(inStream));
+			ArgumentNullException.ThrowIfNull(inStream);
 
-			if (outStream == null)
-				throw new ArgumentNullException(nameof(outStream));
+			ArgumentNullException.ThrowIfNull(outStream);
 
 			try
 			{

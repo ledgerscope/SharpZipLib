@@ -103,8 +103,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
 		/// <param name="stream">Data source</param>
 		public BZip2InputStream(Stream stream)
 		{
-			if (stream == null)
-				throw new ArgumentNullException(nameof(stream));
+			ArgumentNullException.ThrowIfNull(stream);
 			// init arrays
 			for (int i = 0; i < BZip2Constants.GroupCount; ++i)
 			{
@@ -258,10 +257,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
 		/// </returns>
 		public override int Read(byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			for (int i = 0; i < count; ++i)
 			{

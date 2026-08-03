@@ -68,10 +68,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <param name="stream">The <see cref="TarInputStream"/> to use for input.</param>
 		protected TarArchive(TarInputStream stream)
 		{
-			if (stream == null)
-			{
-				throw new ArgumentNullException(nameof(stream));
-			}
+			ArgumentNullException.ThrowIfNull(stream);
 
 			tarIn = stream;
 		}
@@ -82,10 +79,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <param name="stream">The <see cref="TarOutputStream"/> to use for output.</param>
 		protected TarArchive(TarOutputStream stream)
 		{
-			if (stream == null)
-			{
-				throw new ArgumentNullException(nameof(stream));
-			}
+			ArgumentNullException.ThrowIfNull(stream);
 
 			tarOut = stream;
 		}
@@ -119,10 +113,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>Returns a new <see cref="TarArchive"/> suitable for reading from.</returns>
 		public static TarArchive CreateInputTarArchive(Stream inputStream, Encoding nameEncoding)
 		{
-			if (inputStream == null)
-			{
-				throw new ArgumentNullException(nameof(inputStream));
-			}
+			ArgumentNullException.ThrowIfNull(inputStream);
 
 			var tarStream = inputStream as TarInputStream;
 
@@ -159,10 +150,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>Returns a <see cref="TarArchive"/> suitable for reading.</returns>
 		public static TarArchive CreateInputTarArchive(Stream inputStream, int blockFactor, Encoding nameEncoding)
 		{
-			if (inputStream == null)
-			{
-				throw new ArgumentNullException(nameof(inputStream));
-			}
+			ArgumentNullException.ThrowIfNull(inputStream);
 
 			if (inputStream is TarInputStream)
 			{
@@ -179,10 +167,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>Returns a <see cref="TarArchive"/> suitable for writing.</returns>
 		public static TarArchive CreateOutputTarArchive(Stream outputStream, Encoding nameEncoding)
 		{
-			if (outputStream == null)
-			{
-				throw new ArgumentNullException(nameof(outputStream));
-			}
+			ArgumentNullException.ThrowIfNull(outputStream);
 
 			var tarStream = outputStream as TarOutputStream;
 
@@ -226,10 +211,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>Returns a <see cref="TarArchive"/> suitable for writing.</returns>
 		public static TarArchive CreateOutputTarArchive(Stream outputStream, int blockFactor, Encoding nameEncoding)
 		{
-			if (outputStream == null)
-			{
-				throw new ArgumentNullException(nameof(outputStream));
-			}
+			ArgumentNullException.ThrowIfNull(outputStream);
 
 			if (outputStream is TarOutputStream)
 			{
@@ -764,10 +746,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// </param>
 		public void WriteEntry(TarEntry sourceEntry, bool recurse)
 		{
-			if (sourceEntry == null)
-			{
-				throw new ArgumentNullException(nameof(sourceEntry));
-			}
+			ArgumentNullException.ThrowIfNull(sourceEntry);
 
 			if (isDisposed)
 			{

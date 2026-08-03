@@ -117,10 +117,7 @@ namespace ICSharpCode.SharpZipLib.Checksum
 		/// <param name="buffer">Contains the data to update the checksum with.</param>
 		public void Update(byte[] buffer)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			Update(new ArraySegment<byte>(buffer, 0, buffer.Length));
 		}

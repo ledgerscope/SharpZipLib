@@ -275,10 +275,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 			get { return name; }
 			set
 			{
-				if (value == null)
-				{
-					throw new ArgumentNullException(nameof(value));
-				}
+				ArgumentNullException.ThrowIfNull(value);
 
 				name = value;
 			}
@@ -402,10 +399,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 			get { return linkName; }
 			set
 			{
-				if (value == null)
-				{
-					throw new ArgumentNullException(nameof(value));
-				}
+				ArgumentNullException.ThrowIfNull(value);
 
 				linkName = value;
 			}
@@ -420,10 +414,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 			get { return magic; }
 			set
 			{
-				if (value == null)
-				{
-					throw new ArgumentNullException(nameof(value));
-				}
+				ArgumentNullException.ThrowIfNull(value);
 
 				magic = value;
 			}
@@ -439,10 +430,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 
 			set
 			{
-				if (value == null)
-				{
-					throw new ArgumentNullException(nameof(value));
-				}
+				ArgumentNullException.ThrowIfNull(value);
 
 				version = value;
 			}
@@ -539,10 +527,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// </param>
 		public void ParseBuffer(byte[] header, Encoding nameEncoding)
 		{
-			if (header == null)
-			{
-				throw new ArgumentNullException(nameof(header));
-			}
+			ArgumentNullException.ThrowIfNull(header);
 
 			int offset = 0;
 			var headerSpan = header.AsSpan();
@@ -629,10 +614,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <param name="nameEncoding">The <see cref="Encoding"/> used for the Name field, or null for ASCII only</param>
 		public void WriteHeader(byte[] outBuffer, Encoding nameEncoding)
 		{
-			if (outBuffer == null)
-			{
-				throw new ArgumentNullException(nameof(outBuffer));
-			}
+			ArgumentNullException.ThrowIfNull(outBuffer);
 
 			int offset = 0;
 
@@ -771,10 +753,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>The long equivalent of the octal string.</returns>
 		public static long ParseOctal(byte[] header, int offset, int length)
 		{
-			if (header == null)
-			{
-				throw new ArgumentNullException(nameof(header));
-			}
+			ArgumentNullException.ThrowIfNull(header);
 
 			long result = 0;
 			bool stillPadding = true;
@@ -923,15 +902,9 @@ namespace ICSharpCode.SharpZipLib.Tar
 		public static int GetNameBytes(string name, int nameOffset, byte[] buffer, int bufferOffset, int length,
 			Encoding encoding)
 		{
-			if (name == null)
-			{
-				throw new ArgumentNullException(nameof(name));
-			}
+			ArgumentNullException.ThrowIfNull(name);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			int i;
 			if (encoding != null)
@@ -1010,15 +983,9 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// </returns>
 		public static int GetNameBytes(StringBuilder name, byte[] buffer, int offset, int length, Encoding encoding)
 		{
-			if (name == null)
-			{
-				throw new ArgumentNullException(nameof(name));
-			}
+			ArgumentNullException.ThrowIfNull(name);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			return GetNameBytes(name.ToString(), 0, buffer, offset, length, encoding);
 		}
@@ -1049,15 +1016,9 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>The index of the next free byte in the buffer</returns>
 		public static int GetNameBytes(string name, byte[] buffer, int offset, int length, Encoding encoding)
 		{
-			if (name == null)
-			{
-				throw new ArgumentNullException(nameof(name));
-			}
+			ArgumentNullException.ThrowIfNull(name);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			return GetNameBytes(name, 0, buffer, offset, length, encoding);
 		}
@@ -1090,15 +1051,9 @@ namespace ICSharpCode.SharpZipLib.Tar
 		public static int GetAsciiBytes(string toAdd, int nameOffset, byte[] buffer, int bufferOffset, int length,
 			Encoding encoding)
 		{
-			if (toAdd == null)
-			{
-				throw new ArgumentNullException(nameof(toAdd));
-			}
+			ArgumentNullException.ThrowIfNull(toAdd);
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			int i;
 			if (encoding == null)
@@ -1144,10 +1099,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// </returns>
 		public static int GetOctalBytes(long value, byte[] buffer, int offset, int length)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			int localIndex = length - 1;
 

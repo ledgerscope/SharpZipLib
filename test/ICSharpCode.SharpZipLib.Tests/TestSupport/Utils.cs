@@ -27,16 +27,10 @@ namespace ICSharpCode.SharpZipLib.Tests.TestSupport
 
 		private static void Compare(byte[] a, byte[] b)
 		{
-			
-			if (a == null)
-			{
-				throw new ArgumentNullException(nameof(a));
-			}
 
-			if (b == null)
-			{
-				throw new ArgumentNullException(nameof(b));
-			}
+			ArgumentNullException.ThrowIfNull(a);
+
+			ArgumentNullException.ThrowIfNull(b);
 
 			Assert.AreEqual(a.Length, b.Length);
 			for (int i = 0; i < a.Length; ++i)

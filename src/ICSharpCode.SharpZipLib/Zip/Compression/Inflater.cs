@@ -588,10 +588,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
 		/// </exception>
 		public void SetDictionary(byte[] buffer, int index, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (index < 0)
 			{
@@ -677,10 +674,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
 		/// </exception>
 		public int Inflate(byte[] buffer)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			return Inflate(buffer, 0, buffer.Length);
 		}
@@ -714,10 +708,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
 		/// </exception>
 		public int Inflate(byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (count < 0)
 			{

@@ -145,10 +145,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
 		/// <param name="count">The number of bytes of data to use as input.</param>
 		public void SetInput(byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (offset < 0)
 			{

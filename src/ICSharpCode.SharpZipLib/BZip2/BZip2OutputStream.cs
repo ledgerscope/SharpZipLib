@@ -129,8 +129,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
 		/// </remarks>
 		public BZip2OutputStream(Stream stream, int blockSize)
 		{
-			if (stream == null)
-				throw new ArgumentNullException(nameof(stream));
+			ArgumentNullException.ThrowIfNull(stream);
 
 			baseStream = stream;
 			bsLive = 0;
@@ -279,10 +278,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
 		/// <param name="count">The number of bytes to write.</param>
 		public override void Write(byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (offset < 0)
 			{

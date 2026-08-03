@@ -320,10 +320,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <returns>Returns the number of descriptor bytes written.</returns>
 		internal static int WriteDataDescriptor(Stream stream, ZipEntry entry)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
 			int result = 0;
 

@@ -45,10 +45,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		[Obsolete("No Encoding for Name field is specified, any non-ASCII bytes will be discarded")]
 		public TarOutputStream(Stream outputStream, int blockFactor)
 		{
-			if (outputStream == null)
-			{
-				throw new ArgumentNullException(nameof(outputStream));
-			}
+			ArgumentNullException.ThrowIfNull(outputStream);
 
 			this.outputStream = outputStream;
 			buffer = TarBuffer.CreateOutputTarBuffer(outputStream, blockFactor);
@@ -65,10 +62,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <param name="nameEncoding">The <see cref="Encoding"/> used for the Name fields, or null for ASCII only</param>
 		public TarOutputStream(Stream outputStream, int blockFactor, Encoding nameEncoding)
 		{
-			if (outputStream == null)
-			{
-				throw new ArgumentNullException(nameof(outputStream));
-			}
+			ArgumentNullException.ThrowIfNull(outputStream);
 
 			this.outputStream = outputStream;
 			buffer = TarBuffer.CreateOutputTarBuffer(outputStream, blockFactor);
@@ -312,10 +306,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 
 		private async Task PutNextEntryAsync(TarEntry entry, CancellationToken cancellationToken, bool isAsync)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
 			var namelen = nameEncoding != null
 				? nameEncoding.GetByteCount(entry.TarHeader.Name)
@@ -464,10 +455,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 
 		private async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken, bool isAsync)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (offset < 0)
 			{

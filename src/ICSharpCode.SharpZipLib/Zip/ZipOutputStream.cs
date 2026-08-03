@@ -359,10 +359,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 		internal void PutNextEntry(Stream stream, ZipEntry entry, long streamOffset = 0, bool passthroughEntry = false)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
 			if (entries == null)
 			{
@@ -802,10 +799,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 				throw new InvalidOperationException("No open entry.");
 			}
 
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (offset < 0)
 			{

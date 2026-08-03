@@ -122,10 +122,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>A new <see cref="TarBuffer"/> suitable for input.</returns>
 		public static TarBuffer CreateInputTarBuffer(Stream inputStream)
 		{
-			if (inputStream == null)
-			{
-				throw new ArgumentNullException(nameof(inputStream));
-			}
+			ArgumentNullException.ThrowIfNull(inputStream);
 
 			return CreateInputTarBuffer(inputStream, DefaultBlockFactor);
 		}
@@ -138,10 +135,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>A new <see cref="TarBuffer"/> suitable for input.</returns>
 		public static TarBuffer CreateInputTarBuffer(Stream inputStream, int blockFactor)
 		{
-			if (inputStream == null)
-			{
-				throw new ArgumentNullException(nameof(inputStream));
-			}
+			ArgumentNullException.ThrowIfNull(inputStream);
 
 			if (blockFactor <= 0)
 			{
@@ -163,10 +157,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>A new <see cref="TarBuffer"/> suitable for output.</returns>
 		public static TarBuffer CreateOutputTarBuffer(Stream outputStream)
 		{
-			if (outputStream == null)
-			{
-				throw new ArgumentNullException(nameof(outputStream));
-			}
+			ArgumentNullException.ThrowIfNull(outputStream);
 
 			return CreateOutputTarBuffer(outputStream, DefaultBlockFactor);
 		}
@@ -179,10 +170,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>A new <see cref="TarBuffer"/> suitable for output.</returns>
 		public static TarBuffer CreateOutputTarBuffer(Stream outputStream, int blockFactor)
 		{
-			if (outputStream == null)
-			{
-				throw new ArgumentNullException(nameof(outputStream));
-			}
+			ArgumentNullException.ThrowIfNull(outputStream);
 
 			if (blockFactor <= 0)
 			{
@@ -230,10 +218,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		[Obsolete("Use IsEndOfArchiveBlock instead")]
 		public bool IsEOFBlock(byte[] block)
 		{
-			if (block == null)
-			{
-				throw new ArgumentNullException(nameof(block));
-			}
+			ArgumentNullException.ThrowIfNull(block);
 
 			if (block.Length != BlockSize)
 			{
@@ -262,10 +247,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// <returns>Returns true if the block is an EOF block; false otherwise.</returns>
 		public static bool IsEndOfArchiveBlock(byte[] block)
 		{
-			if (block == null)
-			{
-				throw new ArgumentNullException(nameof(block));
-			}
+			ArgumentNullException.ThrowIfNull(block);
 
 			if (block.Length != BlockSize)
 			{
@@ -531,10 +513,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 
 		internal async ValueTask WriteBlockAsync(byte[] buffer, int offset, CancellationToken ct, bool isAsync)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (outputStream == null)
 			{

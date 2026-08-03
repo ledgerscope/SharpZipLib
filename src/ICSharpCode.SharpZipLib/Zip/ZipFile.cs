@@ -470,10 +470,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// </exception>
 		public ZipFile(FileStream file, bool leaveOpen)
 		{
-			if (file == null)
-			{
-				throw new ArgumentNullException(nameof(file));
-			}
+			ArgumentNullException.ThrowIfNull(file);
 
 			if (!file.CanSeek)
 			{
@@ -560,10 +557,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// </exception>
 		public ZipFile(Stream stream, bool leaveOpen, StringCodec stringCodec)
 		{
-			if (stream == null)
-			{
-				throw new ArgumentNullException(nameof(stream));
-			}
+			ArgumentNullException.ThrowIfNull(stream);
 
 			if (!stream.CanSeek)
 			{
@@ -643,10 +637,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="ArgumentNullException"><paramref name="fileName"></paramref> is null</exception>
 		public static ZipFile Create(string fileName)
 		{
-			if (fileName == null)
-			{
-				throw new ArgumentNullException(nameof(fileName));
-			}
+			ArgumentNullException.ThrowIfNull(fileName);
 
 			FileStream fs = File.Create(fileName);
 
@@ -667,10 +658,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="ArgumentException"><paramref name="outStream"> doesnt support writing.</paramref></exception>
 		public static ZipFile Create(Stream outStream)
 		{
-			if (outStream == null)
-			{
-				throw new ArgumentNullException(nameof(outStream));
-			}
+			ArgumentNullException.ThrowIfNull(outStream);
 
 			if (!outStream.CanWrite)
 			{
@@ -912,10 +900,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// </exception>
 		public Stream GetInputStream(ZipEntry entry)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
 			if (isDisposed_)
 			{
@@ -1766,10 +1751,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="NotImplementedException">Compression method is not supported for creating entries.</exception>
 		public void Add(string fileName, CompressionMethod compressionMethod, bool useUnicodeText)
 		{
-			if (fileName == null)
-			{
-				throw new ArgumentNullException(nameof(fileName));
-			}
+			ArgumentNullException.ThrowIfNull(fileName);
 
 			if (isDisposed_)
 			{
@@ -1796,10 +1778,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="NotImplementedException">Compression method is not supported for creating entries.</exception>
 		public void Add(string fileName, CompressionMethod compressionMethod)
 		{
-			if (fileName == null)
-			{
-				throw new ArgumentNullException(nameof(fileName));
-			}
+			ArgumentNullException.ThrowIfNull(fileName);
 
 			CheckSupportedCompressionMethod(compressionMethod);
 			CheckUpdating();
@@ -1817,10 +1796,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="ArgumentNullException">Argument supplied is null.</exception>
 		public void Add(string fileName)
 		{
-			if (fileName == null)
-			{
-				throw new ArgumentNullException(nameof(fileName));
-			}
+			ArgumentNullException.ThrowIfNull(fileName);
 
 			CheckUpdating();
 			AddUpdate(new ZipUpdate(fileName, EntryFactory.MakeFileEntry(fileName)));
@@ -1834,15 +1810,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="ArgumentNullException">Argument supplied is null.</exception>
 		public void Add(string fileName, string entryName)
 		{
-			if (fileName == null)
-			{
-				throw new ArgumentNullException(nameof(fileName));
-			}
+			ArgumentNullException.ThrowIfNull(fileName);
 
-			if (entryName == null)
-			{
-				throw new ArgumentNullException(nameof(entryName));
-			}
+			ArgumentNullException.ThrowIfNull(entryName);
 
 			CheckUpdating();
 			AddUpdate(new ZipUpdate(fileName, EntryFactory.MakeFileEntry(fileName, entryName, true)));
@@ -1855,15 +1825,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <param name="entryName">The name to give to the entry.</param>
 		public void Add(IStaticDataSource dataSource, string entryName)
 		{
-			if (dataSource == null)
-			{
-				throw new ArgumentNullException(nameof(dataSource));
-			}
+			ArgumentNullException.ThrowIfNull(dataSource);
 
-			if (entryName == null)
-			{
-				throw new ArgumentNullException(nameof(entryName));
-			}
+			ArgumentNullException.ThrowIfNull(entryName);
 
 			CheckUpdating();
 			AddUpdate(new ZipUpdate(dataSource, EntryFactory.MakeFileEntry(entryName, false)));
@@ -1878,15 +1842,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="NotImplementedException">Compression method is not supported for creating entries.</exception>
 		public void Add(IStaticDataSource dataSource, string entryName, CompressionMethod compressionMethod)
 		{
-			if (dataSource == null)
-			{
-				throw new ArgumentNullException(nameof(dataSource));
-			}
+			ArgumentNullException.ThrowIfNull(dataSource);
 
-			if (entryName == null)
-			{
-				throw new ArgumentNullException(nameof(entryName));
-			}
+			ArgumentNullException.ThrowIfNull(entryName);
 
 			CheckSupportedCompressionMethod(compressionMethod);
 			CheckUpdating();
@@ -1907,15 +1865,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="NotImplementedException">Compression method is not supported for creating entries.</exception>
 		public void Add(IStaticDataSource dataSource, string entryName, CompressionMethod compressionMethod, bool useUnicodeText)
 		{
-			if (dataSource == null)
-			{
-				throw new ArgumentNullException(nameof(dataSource));
-			}
+			ArgumentNullException.ThrowIfNull(dataSource);
 
-			if (entryName == null)
-			{
-				throw new ArgumentNullException(nameof(entryName));
-			}
+			ArgumentNullException.ThrowIfNull(entryName);
 
 			CheckSupportedCompressionMethod(compressionMethod);
 			CheckUpdating();
@@ -1934,10 +1886,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <remarks>This can be used to add directories, volume labels, or empty file entries.</remarks>
 		public void Add(ZipEntry entry)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
 			CheckUpdating();
 
@@ -1961,15 +1910,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="NotImplementedException">Compression method is not supported for creating entries.</exception>
 		public void Add(IStaticDataSource dataSource, ZipEntry entry)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
-			if (dataSource == null)
-			{
-				throw new ArgumentNullException(nameof(dataSource));
-			}
+			ArgumentNullException.ThrowIfNull(dataSource);
 
 			// We don't currently support adding entries with AES encryption, so throw
 			// up front instead of failing or falling back to ZipCrypto later on
@@ -1990,10 +1933,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <param name="directoryName">The directory to add.</param>
 		public void AddDirectory(string directoryName)
 		{
-			if (directoryName == null)
-			{
-				throw new ArgumentNullException(nameof(directoryName));
-			}
+			ArgumentNullException.ThrowIfNull(directoryName);
 
 			CheckUpdating();
 
@@ -2045,10 +1985,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <returns>True if the entry was found and deleted; false otherwise.</returns>
 		public bool Delete(string fileName)
 		{
-			if (fileName == null)
-			{
-				throw new ArgumentNullException(nameof(fileName));
-			}
+			ArgumentNullException.ThrowIfNull(fileName);
 
 			CheckUpdating();
 
@@ -2074,10 +2011,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <param name="entry">The entry to delete.</param>
 		public void Delete(ZipEntry entry)
 		{
-			if (entry == null)
-			{
-				throw new ArgumentNullException(nameof(entry));
-			}
+			ArgumentNullException.ThrowIfNull(entry);
 
 			CheckUpdating();
 

@@ -67,10 +67,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 		/// </exception>
 		public DeflaterOutputStream(Stream baseOutputStream, Deflater deflater, int bufferSize)
 		{
-			if (baseOutputStream == null)
-			{
-				throw new ArgumentNullException(nameof(baseOutputStream));
-			}
+			ArgumentNullException.ThrowIfNull(baseOutputStream);
 
 			if (baseOutputStream.CanWrite == false)
 			{

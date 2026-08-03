@@ -409,15 +409,9 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 		/// </param>
 		public InflaterInputStream(Stream baseInputStream, Inflater inflater, int bufferSize)
 		{
-			if (baseInputStream == null)
-			{
-				throw new ArgumentNullException(nameof(baseInputStream));
-			}
+			ArgumentNullException.ThrowIfNull(baseInputStream);
 
-			if (inflater == null)
-			{
-				throw new ArgumentNullException(nameof(inflater));
-			}
+			ArgumentNullException.ThrowIfNull(inflater);
 
 			if (bufferSize <= 0)
 			{

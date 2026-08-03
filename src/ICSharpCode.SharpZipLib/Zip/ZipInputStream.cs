@@ -735,10 +735,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <remarks>Zero bytes read means end of stream.</remarks>
 		public override int Read(byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			if (offset < 0)
 			{

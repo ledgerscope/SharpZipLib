@@ -273,10 +273,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 		/// </returns>
 		public override int Read(byte[] buffer, int offset, int count)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			ArgumentNullException.ThrowIfNull(buffer);
 
 			return ReadAsync(buffer.AsMemory().Slice(offset, count), CancellationToken.None, false).GetAwaiter()
 				.GetResult();

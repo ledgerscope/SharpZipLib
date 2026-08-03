@@ -65,10 +65,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <param name="count">The number of bytes available.</param>
 		public void SetData(byte[] data, int offset, int count)
 		{
-			if (data == null)
-			{
-				throw new ArgumentNullException(nameof(data));
-			}
+			ArgumentNullException.ThrowIfNull(data);
 
 			_data = new byte[count];
 			Array.Copy(data, offset, _data, 0, count);
@@ -671,10 +668,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <param name="taggedData">The <see cref="ITaggedData"/> value to add.</param>
 		public void AddEntry(ITaggedData taggedData)
 		{
-			if (taggedData == null)
-			{
-				throw new ArgumentNullException(nameof(taggedData));
-			}
+			ArgumentNullException.ThrowIfNull(taggedData);
 			AddEntry(taggedData.TagID, taggedData.GetData());
 		}
 
@@ -764,10 +758,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <seealso cref="StartNewEntry"/>
 		public void AddData(byte[] data)
 		{
-			if (data == null)
-			{
-				throw new ArgumentNullException(nameof(data));
-			}
+			ArgumentNullException.ThrowIfNull(data);
 
 			_newEntry.Write(data, 0, data.Length);
 		}

@@ -63,10 +63,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 			get { return _baseDirectory; }
 			set
 			{
-				if (value == null)
-				{
-					throw new ArgumentNullException(nameof(value));
-				}
+				ArgumentNullException.ThrowIfNull(value);
 
 				_baseDirectory = Path.GetFullPath(value);
 			}
@@ -179,10 +176,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <returns>Returns a valid name</returns>
 		public static string MakeValidName(string name, char replacement)
 		{
-			if (name == null)
-			{
-				throw new ArgumentNullException(nameof(name));
-			}
+			ArgumentNullException.ThrowIfNull(name);
 
 			name = PathUtils.DropPathRoot(name.Replace("/", Path.DirectorySeparatorChar.ToString()));
 
