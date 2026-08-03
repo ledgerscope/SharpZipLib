@@ -4902,7 +4902,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		{
 			temporaryStream_ = new MemoryStream();
 			stream.Position = 0;
-			StreamUtils.Copy(stream, temporaryStream_, new byte[4096]);
+			stream.CopyTo(temporaryStream_);
 			return temporaryStream_;
 		}
 
@@ -4923,7 +4923,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 				if (stream != null)
 				{
 					stream.Position = 0;
-					StreamUtils.Copy(stream, result, new byte[4096]);
+					stream.CopyTo(result);
 
 					stream.Dispose();
 				}

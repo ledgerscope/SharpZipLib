@@ -717,7 +717,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 			}
 			else
 			{
-				StreamUtils.Copy(stream, outputStream_, buffer_);
+				stream.CopyTo(outputStream_);
 			}
 
 			if (events_ != null)
@@ -771,7 +771,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 								}
 								else
 								{
-									StreamUtils.Copy(inputStream, outputStream, buffer_);
+									inputStream.CopyTo(outputStream);
 								}
 							}
 

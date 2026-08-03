@@ -95,7 +95,7 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 				{
 					Stream entryStream = f.GetInputStream(index);
 					var data = new MemoryStream();
-					StreamUtils.Copy(entryStream, data, new byte[128]);
+					entryStream.CopyTo(data);
 					string contents = Encoding.ASCII.GetString(data.ToArray());
 					Assert.AreEqual("0000000", contents);
 				}
@@ -132,7 +132,7 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 				{
 					Stream entryStream = f.GetInputStream(index);
 					var data = new MemoryStream();
-					StreamUtils.Copy(entryStream, data, new byte[128]);
+					entryStream.CopyTo(data);
 					string contents = Encoding.ASCII.GetString(data.ToArray());
 					Assert.AreEqual("0000000", contents);
 				}
@@ -182,7 +182,7 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 					{
 						Stream entryStream = f.GetInputStream(index);
 						var data = new MemoryStream();
-						StreamUtils.Copy(entryStream, data, new byte[128]);
+						entryStream.CopyTo(data);
 						string contents = Encoding.ASCII.GetString(data.ToArray());
 						Assert.That(contents, Is.EqualTo("0000000"), "archive member data should be correct");
 					}

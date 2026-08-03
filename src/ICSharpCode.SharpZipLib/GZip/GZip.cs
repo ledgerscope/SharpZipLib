@@ -31,7 +31,7 @@ namespace ICSharpCode.SharpZipLib.GZip
 				using (GZipInputStream gzipInput = new GZipInputStream(inStream))
 				{
 					gzipInput.IsStreamOwner = isStreamOwner;
-					Core.StreamUtils.Copy(gzipInput, outStream, new byte[4096]);
+					gzipInput.CopyTo(outStream);
 				}
 			}
 			finally
@@ -76,7 +76,7 @@ namespace ICSharpCode.SharpZipLib.GZip
 				{
 					gzipOutput.SetLevel(level);
 					gzipOutput.IsStreamOwner = isStreamOwner;
-					Core.StreamUtils.Copy(inStream, gzipOutput, new byte[bufferSize]);
+					inStream.CopyTo(gzipOutput);
 				}
 			}
 			finally

@@ -263,7 +263,7 @@ namespace ICSharpCode.SharpZipLib.Tests.Zip
 					CompressionMethod = CompressionMethod.Stored,
 				});
 
-				StreamUtils.Copy(inputFileStream, zipOutputStream, buffer);
+				inputFileStream.CopyTo(zipOutputStream);
 			}
 
 			using (var zf = new ZipFile(dummyZip))
